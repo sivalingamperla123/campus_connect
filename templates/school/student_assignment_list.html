@@ -1,0 +1,43 @@
+{% extends 'school/studentbase.html' %}
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow">
+    <div class="card-header bg-info text-white">
+      <h4>Assignments for Your Class</h4>
+    </div>
+    <div class="card-body">
+      {% if assignments %}
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Subject</th>
+                <th>Due Date</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for a in assignments %}
+              <tr>
+                <td>{{ a.title }}</td>
+                <td>{{ a.subject }}</td>
+                <td>{{ a.due_date }}</td>
+                <td>
+                  {% if a.file %}
+                    <a href="{{ a.file.url }}" class="btn btn-sm btn-secondary" download>Download</a>
+                  {% endif %}
+                  <a href="{% url 'submit-assignment' a.id %}" class="btn btn-sm btn-primary">Submit</a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% else %}
+        <p>No assignments available.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

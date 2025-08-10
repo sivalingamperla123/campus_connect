@@ -1,0 +1,41 @@
+{% extends 'school/teacherbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h4>Post New Assignment</h4>
+    </div>
+    <div class="card-body">
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label class="form-label">Class</label>
+          {% render_field form.cl class="form-select" %}
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Subject</label>
+          {% render_field form.subject class="form-control" %}
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Title</label>
+          {% render_field form.title class="form-control" %}
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Description</label>
+          {% render_field form.description class="form-control" %}
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Due Date</label>
+          {% render_field form.due_date class="form-control" %}
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Upload File (optional)</label>
+          {% render_field form.file class="form-control" %}
+        </div>
+        <button type="submit" class="btn btn-success">Post Assignment</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
